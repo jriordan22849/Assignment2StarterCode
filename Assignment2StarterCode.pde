@@ -17,6 +17,9 @@ void setup()
 
 void draw()
 {
+  
+  background(0);
+
   for(Player player:players)
   {
     player.update();
@@ -71,13 +74,11 @@ void setUpPlayerControllers()
   for(int i = 0 ; i < children.length ; i ++)  
   {
     XML playerXML = children[i];
-    Player p = new Player(
-            i
-            , color(random(0, 255), random(0, 255), random(0, 255))
-            , playerXML);
+    Player p = new Player(i, color(255), playerXML);
     int x = (i + 1) * gap;
+    // x = 250 at begining so is y
     p.pos.x = x;
-    p.pos.y = 300;
-   players.add(p);         
+    p.pos.y = 450;
+    players.add(p);         
   }
 }
