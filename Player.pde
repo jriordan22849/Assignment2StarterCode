@@ -1,6 +1,7 @@
 class Player
 {
   PVector pos;
+  PVector location;
   char up;
   char down;
   char left;
@@ -16,6 +17,7 @@ class Player
   Player()
   {
     pos = new PVector(width / 2, height / 2);
+    location = new PVector(60, 30);
   }
   
   Player(int index, color colour, char up, char down, char left, char right, char start, char button1, char button2)

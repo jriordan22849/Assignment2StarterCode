@@ -13,6 +13,7 @@ void setup()
 {
   size(500, 500);
   setUpPlayerControllers();
+  fleet = new Fleet();
 }
 
 void draw()
@@ -25,6 +26,7 @@ void draw()
     player.update();
     player.display();
   }
+ fleet.display();
 }
 
 void keyPressed()
