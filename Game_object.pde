@@ -1,23 +1,22 @@
-ArrayList<Game_object> objects = new ArrayList<Game_object>();
-class Game_object extends Player
+class Spaceinvader extends Player
 {
-  PVector bullet_position = new PVector(width / 2, height / 2);
-  boolean alive;
-  float theta;
-  
-  Game_object()
-  {
-    alive = true;
-    bullet_position.x = pos.x;
-    bullet_position.y = pos.y;
-  }
-  
-  void move()
-  {
-  }
-  
-  void display()
-  {
-  }
-}
+ int rows = 3; 
+ int cols = 8;
+ boolean positionFlag;
+ int enemyX;
+ int enemyY;
+ int type = 0;
+ 
+ ArrayList<Fleet> invaders; 
+ 
+ Spaceinvader()
+ {
+    enemyX = width / 10 + 35;
+    enemyY = height / 10 + 70;
+    invaders = new ArrayList<Fleet>();
     
+ }
+
+  
+}
+

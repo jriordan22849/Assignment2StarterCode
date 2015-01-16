@@ -12,12 +12,13 @@ class Player
   int index;
   color colour;
   int ship_size = 20;
-  float theta;
+  
     
   Player()
   {
     pos = new PVector(width / 2, height / 2);
     location = new PVector(60, 30);
+    
   }
   
   Player(int index, color colour, char up, char down, char left, char right, char start, char button1, char button2)

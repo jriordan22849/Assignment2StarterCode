@@ -8,6 +8,7 @@
 
 ArrayList<Player> players = new ArrayList<Player>();
 boolean[] keys = new boolean[526];
+boolean start_screen = true;
 
 void setup()
 {
@@ -18,15 +19,23 @@ void setup()
 
 void draw()
 {
-  
-  background(0);
-
-  for(Player player:players)
+  if(start_screen == false)
   {
-    player.update();
-    player.display();
+    background(0);
+  
+    for(Player player:players)
+    {
+      player.update();
+      player.display();
+    }
+    fleet.display();
   }
- fleet.display();
+  else if(start_screen == true)
+  {
+    main_menu.display();
+    main_menu.keyPressed();
+  }
+  
 }
 
 void keyPressed()
