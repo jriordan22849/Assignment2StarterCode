@@ -11,11 +11,40 @@ boolean[] keys = new boolean[526];
 boolean[] alive = new boolean[6];
 boolean start_screen = true;
 
+// Fleet variables
+int number_enemy = 6;
+int enemy_space = 0;
+int Ypos = 30;
+int num_rows = 3;
+int total_enemys;
+
 void setup()
 {
   size(500, 500);
   setUpPlayerControllers();
-  fleet = new Fleet(80, 30, 0, 6);
+  fleet = new Fleet[number_enemy];
+  fleet2 = new Fleet[number_enemy];
+  fleet1 = new Fleet[number_enemy];
+
+    for(int i = 0; i < number_enemy; i ++)
+    {
+      fleet[i] = new Fleet(80, Ypos, enemy_space);
+      enemy_space += 50;
+    }
+    
+    enemy_space = 0;
+    for(int i = 0; i < number_enemy; i ++)
+    {
+      fleet1[i] = new Fleet(80, 80, enemy_space);
+      enemy_space += 50;
+    }
+    
+    enemy_space = 0;
+    for(int i = 0; i < number_enemy; i ++)
+    {
+      fleet2[i] = new Fleet(80, 130, enemy_space);
+      enemy_space += 50;
+    }
 }
 
 void draw()
@@ -29,8 +58,18 @@ void draw()
       player.update();
       player.display();
     }
-    fleet.display();
-    fleet.move();
+    for(int i = 0; i < number_enemy; i ++)
+    {
+      fleet[i].display();
+      fleet1[i].display();
+      fleet2[i].display();
+      
+      fleet[i].move();
+      fleet1[i].move();
+      fleet2[i].move();
+       
+    }
+    
 
   }
   else if(start_screen == true)

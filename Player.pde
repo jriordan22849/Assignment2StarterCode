@@ -100,10 +100,6 @@ class Player
   void display()
   {    
     // spaceshipp
-    pushMatrix();
-
-
-    
     stroke(colour);
     line(pos.x, pos.y, (pos.x + ship_size), pos.y - ship_size);
     line((pos.x + (ship_size *2)), pos.y, (pos.x + ship_size), pos.y - ship_size);
@@ -112,7 +108,5 @@ class Player
     line(pos.x, (pos.y + ship_size), (pos.x + 20), pos.y);
     line((pos.x + 20), pos.y, pos.x + (ship_size * 2), (pos.y + 20));
     line((ship_size * 2) + pos.x, (pos.y + 20), pos.x + (ship_size * 2), pos.y);
-    popMatrix();
-    
   }  
 }

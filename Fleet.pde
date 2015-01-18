@@ -1,4 +1,4 @@
-Fleet fleet;
+Fleet[] fleet, fleet1, fleet2;
 class Fleet extends Player
 {
   int num_enemys = 6;
@@ -10,21 +10,16 @@ class Fleet extends Player
   int total_size; 
   int enemy_space = 50;
   
-  Fleet(float x, float y, int x1, int num_enemy)
+  Fleet(float x, float y, int x1)
   {
     this.x = x;
     this.y = y;
     this.x1 = x1;
-    this.num_enemy = num_enemy;
-  }
-  
 
-  
+  }
+
    void display()
    {
-      int x1 = 0;
-      for( int i = 0; i < num_enemy; i ++)
-      {
         stroke(255);
         line(x + x1, y, x + x1 + 20, y);
         line(x + x1 - 10, y + 20, x + x1, y);
@@ -32,13 +27,11 @@ class Fleet extends Player
         line(x + x1 - 10, y + 20, x + x1 + 30, y + 20);
         line(x + x1 - 10, y + 20, x + x1 - 10, y + 30);
         line(x + x1 + 30, y + 20, x + x1 + 30, y + 30);
-        x1 += 50;
-      }
    }
  
    void move()
    {
-     total_size = num_enemy * 50;
+     total_size = number_enemy * 50;
       
     
      if( (x + total_size) >= 500)
