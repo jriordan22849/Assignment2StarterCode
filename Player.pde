@@ -17,7 +17,7 @@ class Player
   Player()
   {
     pos = new PVector(width / 2, height / 2);
-    location = new PVector(60, 30);
+    //location = new PVector(100, 30);
     
   }
   

@@ -8,13 +8,14 @@
 
 ArrayList<Player> players = new ArrayList<Player>();
 boolean[] keys = new boolean[526];
+boolean[] alive = new boolean[6];
 boolean start_screen = true;
 
 void setup()
 {
   size(500, 500);
   setUpPlayerControllers();
-  fleet = new Fleet();
+  fleet = new Fleet(80, 30, 0, 6);
 }
 
 void draw()
@@ -29,6 +30,8 @@ void draw()
       player.display();
     }
     fleet.display();
+    fleet.move();
+
   }
   else if(start_screen == true)
   {
