@@ -7,6 +7,7 @@
 */
 
 ArrayList<Player> players = new ArrayList<Player>();
+ArrayList<Bullets> bullet = new ArrayList<Bullets>();
 boolean[] keys = new boolean[526];
 boolean[] alive = new boolean[6];
 boolean start_screen = true;
@@ -22,10 +23,15 @@ void setup()
 {
   size(500, 500);
   setUpPlayerControllers();
+  background = new Background[50];
   fleet = new Fleet[number_enemy];
   fleet2 = new Fleet[number_enemy];
   fleet1 = new Fleet[number_enemy];
 
+    for(int i = 0; i < 50; i ++)
+    {
+      background[i] = new Background();
+    }
     for(int i = 0; i < number_enemy; i ++)
     {
       fleet[i] = new Fleet(80, Ypos, enemy_space);
@@ -52,6 +58,10 @@ void draw()
   if(start_screen == false)
   {
     background(0);
+    for(int i = 0; i < 50; i ++)
+    {
+      background[i].display();
+    }
   
     for(Player player:players)
     {
@@ -68,6 +78,12 @@ void draw()
       fleet1[i].move();
       fleet2[i].move();
        
+    }
+    
+    for(int i = 0; i < bullet.size(); i ++)
+    {
+      bullet.get(i).display();
+      bullet.get(i).move();
     }
     
 

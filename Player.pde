@@ -13,10 +13,18 @@ class Player
   color colour;
   int ship_size = 20;
   
+  float timeDelta = 1.0f / 60.0f;
+  float fireRate = 10.0f;
+  float ellapsed = 0.0f;
+  float toPass = 1.0f / fireRate;
+
+  
+  
     
   Player()
   {
     pos = new PVector(width / 2, height / 2);
+
     //location = new PVector(100, 30);
     
   }
@@ -83,13 +91,20 @@ class Player
         pos.x = 0;
       }
     }
-    if (checkKey(start))
+    if (checkKey(start))       
     {
       println("Player " + index + " start");
     }
     if (checkKey(button1))
     {
-      println("Player " + index + " button 1");
+  
+        println("Player " + index + " button e");
+        Bullets bullets = new Bullets();
+        bullets.x = pos.x + ship_size;
+        bullets.y = pos.y;
+        bullet.add(bullets);
+        ellapsed = 0.0f;
+      
     }
     if (checkKey(button2))
     {
