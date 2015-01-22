@@ -8,49 +8,38 @@
 
 ArrayList<Player> players = new ArrayList<Player>();
 ArrayList<Bullets> bullet = new ArrayList<Bullets>();
+ArrayList<Bullets> m_bullet = new ArrayList<Bullets>();
+ArrayList<Fleet> fleet = new ArrayList<Fleet>();
 boolean[] keys = new boolean[526];
-boolean[] alive = new boolean[6];
 boolean start_screen = true;
+
+// End screen
+boolean end_screen = false;
 
 // Fleet variables
 int number_enemy = 6;
 int enemy_space = 0;
-int Ypos = 30;
+int Ypos = 50;
 int num_rows = 3;
 int total_enemys;
+boolean fire = true;
+int lives = 3;
+int score_in_game = 0;
 
 void setup()
 {
   size(500, 500);
   setUpPlayerControllers();
   background = new Background[50];
-  fleet = new Fleet[number_enemy];
-  fleet2 = new Fleet[number_enemy];
-  fleet1 = new Fleet[number_enemy];
+  m_ship = new MotherShip(50, 40, 60, 30, true);
 
     for(int i = 0; i < 50; i ++)
     {
       background[i] = new Background();
     }
-    for(int i = 0; i < number_enemy; i ++)
-    {
-      fleet[i] = new Fleet(80, Ypos, enemy_space);
-      enemy_space += 50;
-    }
     
-    enemy_space = 0;
-    for(int i = 0; i < number_enemy; i ++)
-    {
-      fleet1[i] = new Fleet(80, 80, enemy_space);
-      enemy_space += 50;
-    }
-    
-    enemy_space = 0;
-    for(int i = 0; i < number_enemy; i ++)
-    {
-      fleet2[i] = new Fleet(80, 130, enemy_space);
-      enemy_space += 50;
-    }
+//    create_fleet();
+
 }
 
 void draw()
@@ -58,32 +47,49 @@ void draw()
   if(start_screen == false)
   {
     background(0);
+    fill(#FF0000);
+    // Displays Score in the top left hand conrer
+    textSize(20);
+    text("Lives:" + lives, 10, 30);
     for(int i = 0; i < 50; i ++)
     {
       background[i].display();
     }
-  
+    
+    m_ship.display();
+    m_ship.move();
+    
     for(Player player:players)
     {
+      player.hit_detection();
+      player.m_ship_hit_detection();
       player.update();
       player.display();
     }
-    for(int i = 0; i < number_enemy; i ++)
-    {
-      fleet[i].display();
-      fleet1[i].display();
-      fleet2[i].display();
-      
-      fleet[i].move();
-      fleet1[i].move();
-      fleet2[i].move();
-       
-    }
+    
     
     for(int i = 0; i < bullet.size(); i ++)
     {
       bullet.get(i).display();
       bullet.get(i).move();
+    }
+        
+    for(int i = 0; i < m_bullet.size(); i ++)
+    {
+      m_bullet.get(i).display_enemy_bullet();
+      m_bullet.get(i).enemy_move();
+    }
+    
+    for(int i = 0; i < fleet.size(); i ++)
+    {
+       fleet.get(i).display(); 
+    }
+    
+    m_ship.m_fire_display();
+   
+    if(end_screen == true)
+    {
+      end_screen();
     }
     
 
@@ -95,6 +101,21 @@ void draw()
   }
   
 }
+
+//void create_fleet()
+//{
+//  Fleet fleet1 = new Fleet(); 
+//  fleet1.x = 50;
+//  fleet1.y = 50;
+//  fleet1.space = 50;
+//  fleet.add(fleet1);
+//}
+
+
+
+
+
+
 
 void keyPressed()
 {
