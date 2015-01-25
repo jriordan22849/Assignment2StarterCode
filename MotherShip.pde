@@ -23,18 +23,17 @@ class MotherShip
   {
     if(alive == true)
     {
-       stroke(#0D5AFC);
-       fill(#6092FA);
-       ellipse(x, y - 15, m_width - 30, m_height - 15);
+       stroke(#0D8DFA);
+       fill(#76C0FF);
        ellipse(x, y, m_width, m_height);
-       stroke(#6092FA);
+       stroke(#76C0FF);
        ellipse(x, y - 15, m_width - 30, m_height - 15);
     }
   }
   
   void move()
   {
-     if( x >= 500)
+     if( x >= width)
      {
        flag1 = true;
        flag2 = false;

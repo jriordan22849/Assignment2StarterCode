@@ -27,12 +27,17 @@ class Starter extends Player
     fill(255);
     text("Press 's' in order to start the game",125, 450);    
   }
-  void keyPressed()
+  
+  void start_game()
   {
-    if(key == 's' || key == 'S')
+    if (checkKey(start))       
     {
-      start_screen = false;
+      println("Player " + index + " start or s");
+      if(start_screen == true)
+      {
+        game_screen = true; 
+        start_screen = false;
+      }
     }
   }
-  
 }

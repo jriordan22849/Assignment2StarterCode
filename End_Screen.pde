@@ -10,9 +10,10 @@
     text( end_text,100, 50);
     
     textSize(25);
-    text(score + score_in_game, 100, 200);
+    text(score + score_in_game, 100, 225);
     
-   text("Press 'r' to Restart", 100, 300);
-   
+    textSize(20);
+    text("Press 'r' to Restart", 100, 300);
+    text("Press 's' to return to main menu", 100, 400);
  }
 

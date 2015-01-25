@@ -19,22 +19,18 @@ class Bullets extends Player
   void move()
   {
     y += speed;
-    ellapsed += timeDelta;
   }
    
   void display()
   {
     stroke(255);
-    line(x , y, x, y + speed); 
-    float temp_var = y + speed;
-    
+    line(x - 20 , y - 20, x - 20, y + speed);     
   }
   
   void display_enemy_bullet()
   {
     stroke(255);
     line(x1 , y1, x1, y1 + speed2);
-    println(fire);
   }
   
   void enemy_move()

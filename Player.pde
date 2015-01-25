@@ -12,7 +12,8 @@ class Player
   int index;
   color colour;
   int ship_size = 20;
-  
+  int w = 60;
+  int h = 30;
   float timeDelta = 1.0f / 60.0f;
   float fireRate = 10.0f;
   float ellapsed = 0.0f;
@@ -71,7 +72,7 @@ class Player
     if (checkKey(down))
     {
       pos.y += 2;
-      if(pos.y >= height)
+      if(pos.y > height - 20)
       {
         pos.y -= 2;
       }
@@ -79,7 +80,7 @@ class Player
     if (checkKey(left))
     {
       pos.x -= 2;
-      if(pos.x <= 0)
+      if(pos.x + w <= 0)
       {
         pos.x = width;
       }
@@ -87,14 +88,14 @@ class Player
     if (checkKey(right))
     {
       pos.x += 2;
-      if(pos.x >= width)
+      if(pos.x - w >= width)
       {
         pos.x = 0;
       }
     }
     if (checkKey(start))       
     {
-      println("Player " + index + " start");
+      println("Player " + index + " start or s");
     }
     if (checkKey(button1))
     {
@@ -109,27 +110,18 @@ class Player
     }
     if (checkKey(button2))
     {
-      println("Player " + index + " butt2");
-      if(end_screen = true)
-      {
-         lives = 3;
-         score_in_game = 0;
-         end_screen = !end_screen; 
-      }
+      println("Player " + index + " butt2 or r");
     }    
   }
   
   void display()
   {    
     // spaceshipp
-    stroke(colour);
-    line(pos.x, pos.y, (pos.x + ship_size), pos.y - ship_size);
-    line((pos.x + (ship_size *2)), pos.y, (pos.x + ship_size), pos.y - ship_size);
-    line(pos.x, pos.y, pos.x + (ship_size * 2), pos.y);
-    line(pos.x, pos.y, pos.x, (pos.y + ship_size));
-    line(pos.x, (pos.y + ship_size), (pos.x + 20), pos.y);
-    line((pos.x + 20), pos.y, pos.x + (ship_size * 2), (pos.y + 20));
-    line((ship_size * 2) + pos.x, (pos.y + 20), pos.x + (ship_size * 2), pos.y);
+    fill(#95FFDD);
+    stroke(#36FFBE);
+    ellipse(pos.x, pos.y - 10, w - 25,h);
+    stroke(#95FFDD);
+    ellipse(pos.x, pos.y, w, h); 
   }  
   
   void hit_detection()
@@ -142,11 +134,6 @@ class Player
          m_bullet.remove(i);
          lives--;
          background(#FF0000);
-         
-         if(lives == 0)
-         {
-           end_screen = true;
-         }
        }
        
      }
@@ -157,10 +144,11 @@ class Player
     for(int i = 0; i < bullet.size(); i ++)
     {
       Bullets bullets1 = bullet.get(i);
-      if(dist(m_ship.x, m_ship.y, bullets1.x, bullets1.y) <= 50)
+      if(dist(m_ship.x + 10, m_ship.y, bullets1.x, bullets1.y) <= 40)
       {
         bullet.remove(i);
-        m_ship.x = 600;
+        score_in_game += 10;
+        m_ship.x = width + 50;
       }
       if(bullets1.y <= 0)
       {
@@ -169,6 +157,25 @@ class Player
         
     }
   }
+  
+  void fleet_hit_detection()
+  {
+    for(int i = 0; i < bullet.size(); i ++)
+    {
+      Bullets bullet2 = bullet.get(i);
+      for(int j = 0; j < fleet.size(); j ++)
+      {
+        Fleet fleet3 = fleet.get(j);
+        if(dist(bullet2.x, bullet2.y, fleet3.x, fleet3.y) <= 30)
+        {
+          bullet.remove(i);
+          fleet.remove(j);
+          score_in_game += 5;
+        }
+      }
+    }
+  }
+    
 }
 
 
