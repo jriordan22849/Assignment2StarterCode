@@ -23,10 +23,10 @@ class MotherShip
   {
     if(alive == true)
     {
-       stroke(#0D8DFA);
        fill(#76C0FF);
+       stroke(#0D8DFA);
        ellipse(x, y, m_width, m_height);
-       stroke(#76C0FF);
+       stroke(#0D8DFA);
        ellipse(x, y - 15, m_width - 30, m_height - 15);
     }
   }

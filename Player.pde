@@ -14,14 +14,7 @@ class Player
   int ship_size = 20;
   int w = 60;
   int h = 30;
-  float timeDelta = 1.0f / 60.0f;
-  float fireRate = 10.0f;
-  float ellapsed = 0.0f;
-  float toPass = 1.0f / fireRate;
-  
-  
-  
-    
+   
   Player()
   {
     pos = new PVector(width / 2, height / 2);
@@ -71,6 +64,11 @@ class Player
     }
     if (checkKey(down))
     {
+      if(start_screen == true)
+      {
+        instructions = true;
+        start_screen = false;
+      }
       pos.y += 2;
       if(pos.y > height - 20)
       {
@@ -87,6 +85,7 @@ class Player
     }    
     if (checkKey(right))
     {
+      
       pos.x += 2;
       if(pos.x - w >= width)
       {
@@ -95,32 +94,59 @@ class Player
     }
     if (checkKey(start))       
     {
-      println("Player " + index + " start or s");
+      println("Player " + index + " start or s button");
+      if(start_screen == true)
+      {
+         game_screen = true;
+         start_screen = false; 
+      }
+      
+      if(end_screen == true)
+      {
+        lives = 3;
+        score_in_game = 0;
+        
+        game_screen = true;
+        end_screen = false;
+      }
     }
     if (checkKey(button1))
-    {
-        if(temp == 0)
-        {
-          println("Player " + index + " button e");
-          Bullets bullets = new Bullets();
-          bullets.x = pos.x + ship_size;
-          bullets.y = pos.y;
-          bullet.add(bullets);       
-        }
+    {      
+      if(temp == 0)
+      {
+        println("Player " + index + " button e");
+        Bullets bullets = new Bullets();
+        bullets.x = pos.x + ship_size;
+        bullets.y = pos.y;
+        bullet.add(bullets);       
+      }
+      
+      if(end_screen == true)
+      {
+        lives = 3;
+        score_in_game = 0;
+        start_screen = true;
+        end_screen = false;
+      }
     }
     if (checkKey(button2))
     {
       println("Player " + index + " butt2 or r");
+      if(instructions == true)
+      {
+        start_screen = true;
+        instructions = false;
+      }
     }    
   }
   
   void display()
   {    
     // spaceshipp
-    fill(#95FFDD);
-    stroke(#36FFBE);
+    fill(#FFE283);
+    stroke(#FFD340);
     ellipse(pos.x, pos.y - 10, w - 25,h);
-    stroke(#95FFDD);
+    stroke(#FFD340);
     ellipse(pos.x, pos.y, w, h); 
   }  
   
@@ -174,8 +200,7 @@ class Player
         }
       }
     }
-  }
-    
+  }   
 }
 
 

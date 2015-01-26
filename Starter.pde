@@ -8,36 +8,21 @@ class Starter extends Player
   void display()
   {
     // main menu screen
-    background(0);
+    background(#B9DFFF);
     
-    fill(255);
+    fill(#36A3FF);
     textSize(50);
-    text("Space Invaders", (width / 6), 100);    
-    
-    // begin box
-    fill(#FF9D9D);
-    rect( (width / 4), (height / 2), 225, 50);
-    // text for box
-    fill(0);
-    textSize(30);
-    text("Start Game", (width / 3.3), 285);
+    text("Space Invaders", (width / 6), 100);   
+   
+    fill(255);
+    rect(60, 150, 400, 175, 5); 
     
     // button pressed in order to start the game, the button will be "s"
-    textSize(15);
-    fill(255);
-    text("Press 's' in order to start the game",125, 450);    
-  }
+    textSize(20);
+    fill(0);
+    text("Press 'q' or 'start' to start the game",80, 210);  
+    text("Press 's' or 'button1' for instructions",80, 270);  
   
-  void start_game()
-  {
-    if (checkKey(start))       
-    {
-      println("Player " + index + " start or s");
-      if(start_screen == true)
-      {
-        game_screen = true; 
-        start_screen = false;
-      }
-    }
+      
   }
 }

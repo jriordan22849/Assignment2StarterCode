@@ -10,12 +10,14 @@ ArrayList<Player> players = new ArrayList<Player>();
 ArrayList<Bullets> bullet = new ArrayList<Bullets>();
 ArrayList<Bullets> m_bullet = new ArrayList<Bullets>();
 ArrayList<Fleet> fleet = new ArrayList<Fleet>();
+ArrayList<Power_up> power_up = new ArrayList<Power_up>();
 boolean[] keys = new boolean[526];
 
 // different screens in game
-boolean start_screen = false;
-boolean game_screen  = true;
+boolean start_screen = true;
+boolean game_screen  = false;
 boolean end_screen = false;
+boolean instructions = false;
 
 // Fleet variables
 int number_enemy = 6;
@@ -41,6 +43,7 @@ void setup()
   }
   
   create_enemys();
+  create_power_ups();
 }
 
 void draw()
@@ -48,14 +51,26 @@ void draw()
   if(start_screen == true)
   {
     main_menu.display();
-    main_menu.start_game();
+    for(Player player_start_screen:players)
+    {
+      player_start_screen.update();
+    }
+  }
+  if(instructions == true)
+  {
+    instructions(); 
+    for(Player player_start_screen:players)
+    {
+      player_start_screen.update();
+    }
   }
   if(game_screen == true)
   {
     background(0);
     barrier();
-    if(lives == 0)
+    if(lives <= 0)
     {
+      game_screen = false;
       end_screen = true;
     }
     
@@ -77,6 +92,13 @@ void draw()
     {
       fleet.get(i).display();
       fleet.get(i).move();
+    }
+    
+    for(int i = 0; i < power_up.size(); i ++)
+    {
+      power_up.get(i).display();
+      power_up.get(i).move();
+      power_up.get(i).power_up_hit_detection();
     }
     
     
@@ -110,11 +132,37 @@ void draw()
     text("Lives: " + lives, 10, 30);
     text("Score: " + score_in_game, 10, 60);
    
-   
-    if(end_screen == true)
+  }
+  
+  if(end_screen == true)
+  {
+    for(int i = 0; i < fleet.size(); i ++)
     {
-      end_screen();
+      fleet.remove(i); 
     }
+    
+    for(int i = 0; i < power_up.size(); i ++)
+    {
+      power_up.remove(i);
+    }
+    end_screen();
+    for(Player player_start_screen:players)
+    {
+      player_start_screen.update();
+    }
+  }
+}
+
+void create_power_ups()
+{
+  float x = random(0, width);
+  float y = random(-1000, -500);
+  float size = 20;
+  int number_power_ups = 1;
+  
+  for(int i = 0; i < number_power_ups; i ++)
+  {
+    power_up.add(new Power_up(x, y, size));
   }
 }
 
@@ -168,12 +216,6 @@ void barrier()
    }
  } 
 }
-
-
-
-
-
-
 
 
 void keyPressed()
@@ -233,3 +275,29 @@ void setUpPlayerControllers()
     players.add(p);         
   }
 }
+
+void instructions()
+{
+  background(#B9DFFF);  
+  textSize(30);
+  fill(#FF121A);
+  text("Rules", 225, 50);
+  textSize(20);
+  text("- Player has 3 lives.", 25, 100);
+  text("- Dodge Mothership bullets to survive.", 25, 125);
+  text("- Destroy enemy fleet before they cross the line.", 25, 150);
+  text("- Collect the yellow circles to gain an extra life.", 25, 175);
+  
+  textSize(30);
+  text("Controls", 205, 225);
+  
+  textSize(20);
+  text("- 'w' to move up", 25, 275);
+  text("- 'a' to move left", 25, 300);
+  text("- 'd' to move right", 25, 325);
+  text("- 's' to move down", 25, 350);
+  text("- 'e' to fire", 25, 375);
+  
+  text("'r' to return to main menu", 25, 450);
+}
+

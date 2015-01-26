@@ -1,4 +1,3 @@
-
  void end_screen()
  {
     String end_text = "End of Game";
@@ -13,7 +12,7 @@
     text(score + score_in_game, 100, 225);
     
     textSize(20);
-    text("Press 'r' to Restart", 100, 300);
-    text("Press 's' to return to main menu", 100, 400);
+    text("Press 'q' to Restart", 100, 300);
+    text("Press 'e' to return to main menu", 100, 400);
  }
 

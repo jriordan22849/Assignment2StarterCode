@@ -18,10 +18,10 @@ class Fleet extends Player
   
   void display()
   {
-     fill(#FFA7AA);
-     stroke(#FF0000);
+     fill(#B0C6FC);
+     stroke(#5D8CFF);
      ellipse(x ,y + speed,w,h);
-     stroke(#FFA7AA);
+     stroke(#5D8CFF);
      ellipse(x,y - 5 + speed , w - 25,h);
   }
   
@@ -59,9 +59,7 @@ class Fleet extends Player
         x += 1;
       }
     
-  }
-  
-    
+  }  
 }
  
 
