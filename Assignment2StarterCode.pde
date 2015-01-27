@@ -6,6 +6,12 @@
     See: https://github.com/skooter500/DT228-OOP 
 */
 
+import ddf.minim.*;
+
+Minim minim, m_fire_sound, player_fire_sound, hit_detection, player_hurt, explosion, power_up_sound;
+AudioPlayer player, player2, player3, player4, player5, player6;
+
+
 ArrayList<Player> players = new ArrayList<Player>();
 ArrayList<Bullets> bullet = new ArrayList<Bullets>();
 ArrayList<Bullets> m_bullet = new ArrayList<Bullets>();
@@ -33,6 +39,15 @@ int score_in_game = 0;
 void setup()
 {
   size(500, 500);
+  minim = new Minim(this);
+  m_fire_sound = new Minim(this);
+  player_fire_sound = new Minim(this);
+  hit_detection = new Minim(this);
+  player_hurt = new Minim(this);
+  explosion = new Minim(this);
+  power_up_sound = new Minim(this);
+  player = minim.loadFile("Phutureprimitive - Kinetik.mp3");
+  player.play();
   setUpPlayerControllers();
   background = new Background[50];
   m_ship = new MotherShip(50, 40, 60, 30, true);
@@ -168,14 +183,14 @@ void create_power_ups()
 
   void create_enemys()
  {
-  float x = 125;
+  float x = 5;
   float y = 60;
   float w = 40;
   float h = 15;
   int distance = 0;
   float row = 0;
   int num_rows = 3;
-  int ships_per_row = 5; 
+  int ships_per_row = 6; 
 
   for(int i = 0; i <= num_rows; i ++)
   {

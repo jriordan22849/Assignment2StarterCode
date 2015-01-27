@@ -32,6 +32,8 @@ class Power_up extends Player
       Power_up p_up = power_up.get(i);
       if(dist( p_up.x, p_up.y + power_speed, temp_player.pos.x, temp_player.pos.y) <= 30)
       {
+        player6 = power_up_sound.loadFile("Powerup2.wav");
+        player6.play();
         lives += 1;
         background(#FFDDA5);
         power_up.remove(i);

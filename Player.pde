@@ -112,8 +112,10 @@ class Player
     }
     if (checkKey(button1))
     {      
-      if(temp == 0)
+      if(temp == 0 && game_screen == true)
       {
+        player2 = player_fire_sound.loadFile("Laser_Shoot8.wav");
+        player2.play();
         println("Player " + index + " button e");
         Bullets bullets = new Bullets();
         bullets.x = pos.x + ship_size;
@@ -157,6 +159,8 @@ class Player
        Bullets bullets =  m_bullet.get(i);
        if(dist(bullets.x1, bullets.y1, pos.x, pos.y) <= 40)
        {
+         player5 = player_hurt.loadFile("Hit_Hurt17.wav");
+         player5.play();
          m_bullet.remove(i);
          lives--;
          background(#FF0000);
@@ -172,6 +176,8 @@ class Player
       Bullets bullets1 = bullet.get(i);
       if(dist(m_ship.x + 10, m_ship.y, bullets1.x, bullets1.y) <= 40)
       {
+        player4 = hit_detection.loadFile("Explosion5.wav");
+        player4.play();
         bullet.remove(i);
         score_in_game += 10;
         m_ship.x = width + 50;
@@ -192,8 +198,10 @@ class Player
       for(int j = 0; j < fleet.size(); j ++)
       {
         Fleet fleet3 = fleet.get(j);
-        if(dist(bullet2.x, bullet2.y, fleet3.x, fleet3.y) <= 30)
+        if(dist(bullet2.x, bullet2.y, fleet3.x, fleet3.y) <= 25)
         {
+          player4 = hit_detection.loadFile("Explosion5.wav");
+          player4.play();
           bullet.remove(i);
           fleet.remove(j);
           score_in_game += 5;

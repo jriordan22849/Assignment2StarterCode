@@ -71,9 +71,11 @@ class MotherShip
      enemy_bullets.y = y;
     int temp = frameCount % 90;
     
-    if(temp == 1)
+    if(temp == 1 && game_screen  == true)
     {
-        m_bullet.add(enemy_bullets);
+      player3 = m_fire_sound.loadFile("Laser_Shoot26.wav");
+      player3.play();
+      m_bullet.add(enemy_bullets);
     }
   }
 }
