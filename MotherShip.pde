@@ -1,3 +1,4 @@
+//class for the mother ship, has the methods move and update
 MotherShip m_ship;
 class MotherShip
 {
@@ -69,7 +70,7 @@ class MotherShip
      Bullets enemy_bullets= new Bullets();
      enemy_bullets.x = x;
      enemy_bullets.y = y;
-    int temp = frameCount % 90;
+    int temp = frameCount % 60;
     
     if(temp == 1 && game_screen  == true)
     {

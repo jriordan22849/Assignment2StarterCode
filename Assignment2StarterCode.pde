@@ -1,17 +1,20 @@
-/* this is a test
-    DIT OOP Assignment 2 Starter Code
-    =================================
-    
-    Loads player properties from an xml file
-    See: https://github.com/skooter500/DT228-OOP 
+/*
+Student ID: C13432152
+Name: Jonathan Riordan
+Object Orientated Programming Assignment
+
+SPACE INVADERS
 */
 
+// import music library
 import ddf.minim.*;
 
 Minim minim, m_fire_sound, player_fire_sound, hit_detection, player_hurt, explosion, power_up_sound;
 AudioPlayer player, player2, player3, player4, player5, player6;
 
+// set screen size either for laptop or gaming arcade machine depending on devmode
 
+// Arraylist used for bullets, enemys, power up and the player.
 ArrayList<Player> players = new ArrayList<Player>();
 ArrayList<Bullets> bullet = new ArrayList<Bullets>();
 ArrayList<Bullets> m_bullet = new ArrayList<Bullets>();
@@ -32,13 +35,16 @@ int Ypos = 50;
 int num_rows = 3;
 int total_enemys;
 
+int num_stars = 50;
 // Player in game variables
 int lives = 3;
 int score_in_game = 0;
 
 void setup()
 {
-  size(500, 500);
+  size(800, 600);
+
+  
   minim = new Minim(this);
   m_fire_sound = new Minim(this);
   player_fire_sound = new Minim(this);
@@ -46,69 +52,95 @@ void setup()
   player_hurt = new Minim(this);
   explosion = new Minim(this);
   power_up_sound = new Minim(this);
+  
+  // background song played throughout the programe and is on a loop.
   player = minim.loadFile("Phutureprimitive - Kinetik.mp3");
-  player.play();
+  player.loop();
+  
+  // Player controls are set up
   setUpPlayerControllers();
-  background = new Background[50];
+  
+  // the starts in the background, there is 50.
+  background = new Background[num_stars];
+  
+  // mothership location a and y, width and height
   m_ship = new MotherShip(50, 40, 60, 30, true);
 
-  for(int i = 0; i < 50; i ++)
+  for(int i = 0; i < num_stars; i ++)
   {
     background[i] = new Background();
   }
   
+  // calls the create enemys function and create power up function
   create_enemys();
   create_power_ups();
 }
 
 void draw()
 {
+  // start screen
   if(start_screen == true)
   {
+    // calls function main menu
     main_menu.display();
+    
+    // controls for the user in the start screen
     for(Player player_start_screen:players)
     {
       player_start_screen.update();
     }
   }
+  
+  // instruction screen 
   if(instructions == true)
   {
     instructions(); 
+    
+    // controls for the user in the start screen
     for(Player player_start_screen:players)
     {
       player_start_screen.update();
     }
   }
+  
+  // game screen
   if(game_screen == true)
   {
     background(0);
     barrier();
+    
+    // if lives is less or equal to 0, the game screen is turned off and the end screen is activated
     if(lives <= 0)
     {
       game_screen = false;
       end_screen = true;
     }
     
-    for(int i = 0; i < 50; i ++)
+    // displays the stars
+    for(int i = 0; i < num_stars; i ++)
     {
       background[i].display();
     }
     
+    // mother ship methods
     m_ship.display();
     m_ship.move();
     m_ship.m_fire_display();
     
+    // if  all of the ships in the enemy fleet is destroyed, a new fleet is created
     if(fleet.isEmpty())
     {
       create_enemys();
     }
- 
+   
+    // fleet methods
     for(int i = 0; i < fleet.size(); i ++)
     {
       fleet.get(i).display();
       fleet.get(i).move();
     }
     
+    // power ups method
     for(int i = 0; i < power_up.size(); i ++)
     {
       power_up.get(i).display();
@@ -116,7 +148,7 @@ void draw()
       power_up.get(i).power_up_hit_detection();
     }
     
-    
+    // player methods
     for(Player player:players)
     {
       player.hit_detection();
@@ -126,14 +158,14 @@ void draw()
       player.display();
     }
     
-    
+    // bullet methods
     for(int i = 0; i < bullet.size(); i ++)
     {
       bullet.get(i).display();
       bullet.get(i).move();
     }
         
-        
+    // mother ship bullets methods 
     for(int i = 0; i < m_bullet.size(); i ++)
     {
       m_bullet.get(i).display_enemy_bullet();
@@ -141,6 +173,7 @@ void draw()
     }
     
     
+    // Displays the score and lives of the player in the top left hand corner of the screen
     fill(#FF0000);
     // Displays Score in the top left hand conrer
     textSize(20);
@@ -149,18 +182,25 @@ void draw()
    
   }
   
+  // end screen
   if(end_screen == true)
   {
+    // removes enemy fleet from the arraylist.
     for(int i = 0; i < fleet.size(); i ++)
     {
       fleet.remove(i); 
     }
-    
+
+    // removes power ups from the array list
     for(int i = 0; i < power_up.size(); i ++)
     {
       power_up.remove(i);
     }
+    
+    
     end_screen();
+    
+    // controls for the user in the end screen
     for(Player player_start_screen:players)
     {
       player_start_screen.update();
@@ -168,6 +208,7 @@ void draw()
   }
 }
 
+// function to create a power up which gives the user an extra lfe. the x position is random and the y position is random aswell,
 void create_power_ups()
 {
   float x = random(0, width);
@@ -181,16 +222,17 @@ void create_power_ups()
   }
 }
 
+// Funcion to create the enemys 
   void create_enemys()
  {
   float x = 5;
-  float y = 60;
+  float y = 80;
   float w = 40;
   float h = 15;
   int distance = 0;
   float row = 0;
-  int num_rows = 3;
-  int ships_per_row = 6; 
+  int num_rows = 4;
+  int ships_per_row = 8; 
 
   for(int i = 0; i <= num_rows; i ++)
   {
@@ -205,10 +247,11 @@ void create_power_ups()
 
 }
 
+// finction to create a barrier and display it
 void barrier()
 {
  int x = 0;
- int y = 450;
+ int y = (height - 50);
  int spacing = 0;
  int size = 5;
  
@@ -225,6 +268,8 @@ void barrier()
    Fleet temp_fleet = fleet.get(i);
    if(temp_fleet.y >= y - 50)
    {
+     player5 = player_hurt.loadFile("Hit_Hurt17.wav");
+     player5.play();
      fleet.remove(i);
      background(#FF0000);
      lives--;
@@ -284,19 +329,21 @@ void setUpPlayerControllers()
     XML playerXML = children[i];
     Player p = new Player(i, color(255), playerXML);
     int x = (i + 1) * gap;
-    // x = 250 at begining so is y
+    
+    // player x and y position
     p.pos.x = x;
-    p.pos.y = 450;
+    p.pos.y = height - 25;
     players.add(p);         
   }
 }
 
+// function to display instructions to the user 
 void instructions()
 {
-  background(#B9DFFF);  
+  background(0);  
   textSize(30);
   fill(#FF121A);
-  text("Rules", 225, 50);
+  text("Rules", width / 2.5, 50);
   textSize(20);
   text("- Player has 3 lives.", 25, 100);
   text("- Dodge Mothership bullets to survive.", 25, 125);
@@ -304,7 +351,7 @@ void instructions()
   text("- Collect the yellow circles to gain an extra life.", 25, 175);
   
   textSize(30);
-  text("Controls", 205, 225);
+  text("Controls", width / 2.5, 225);
   
   textSize(20);
   text("- 'w' to move up", 25, 275);

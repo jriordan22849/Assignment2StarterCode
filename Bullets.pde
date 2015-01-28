@@ -1,3 +1,4 @@
+// Class for the bullet, used to display the bullet and update its y position. it extends the player class 
 float speed = -10.0f;
 float speed2 = 10.0f;
 class Bullets extends Player
@@ -8,6 +9,7 @@ class Bullets extends Player
   float ellapsed = 0.0;
   float timeDelta = 1.0f / 60.0f;
   
+  // constructor
   Bullets()
   {
     x = pos.x + (ship_size * 2);

@@ -1,3 +1,4 @@
+// class for the background to get the stars x and y position and to display the stars.(circles)
 Background[] background;
 class Background
 {
@@ -12,6 +13,7 @@ class Background
   void display()
   {
     stroke(255);
+    fill(255);
     ellipse(x,y,2,2);
   }
 }

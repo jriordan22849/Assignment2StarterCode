@@ -1,3 +1,4 @@
+// class for the fleet, displays the fleet and update 
 class Fleet extends Player
 {
   float x, y, space, w,h;
@@ -27,9 +28,6 @@ class Fleet extends Player
   
   void move()
   {
-    int total_num;
-    total_num = 60 * number_enemy;
-
       if(x >= width)
       {
         flag1 = false;
@@ -46,19 +44,18 @@ class Fleet extends Player
      }
       if(flag1 == true)
       {
-        x += 1;
+        x += 2;
       }
       
       if(flag2 == true)
       {
-        x-=1;
+        x -= 2;
       }
       
       if(flag3 == true)
       {
-        x += 1;
+        x += 2;
       }
-    
   }  
 }
  

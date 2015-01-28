@@ -1,3 +1,6 @@
+// This is the main class, it contains controls for the user, hit detection for bullets on mthership,
+//fleet and the bullets fired from the mother ship to the player.
+
 class Player
 {
   PVector pos;
@@ -53,11 +56,11 @@ class Player
   
   void update()
   {
-    int temp = frameCount % 30;
+    int temp = frameCount % 60;
     if (checkKey(up))
     {
       pos.y -= 2;
-      if(pos.y <= 450)
+      if(pos.y <= (height - 60))
       {
         pos.y += 2;
       }
@@ -198,7 +201,7 @@ class Player
       for(int j = 0; j < fleet.size(); j ++)
       {
         Fleet fleet3 = fleet.get(j);
-        if(dist(bullet2.x, bullet2.y, fleet3.x, fleet3.y) <= 25)
+        if(dist(bullet2.x, bullet2.y, fleet3.x, fleet3.y) <= 30)
         {
           player4 = hit_detection.loadFile("Explosion5.wav");
           player4.play();
